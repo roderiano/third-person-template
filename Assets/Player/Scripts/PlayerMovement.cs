@@ -63,13 +63,13 @@ public class PlayerMovement : MonoBehaviour
     {
         if (characterController.isGrounded && velocity.y < 0)
         {
-            velocity.y = 0f;
+            velocity.y = -1f;
         }
 
-        if (Input.GetKey(KeyCode.Space) && characterController.isGrounded && currentAnimationName != "Falling Idle")
+        if (Input.GetKeyDown(KeyCode.Space) && currentAnimationName != "Falling Idle")
         {
             animController.SetTrigger("Jump");
-            velocity.y += Mathf.Sqrt(1f * -3.0f * gravityValue);
+            velocity.y += Mathf.Sqrt(1.2f * -3.0f * gravityValue);
         }
 
         velocity.y += gravityValue * Time.deltaTime;
