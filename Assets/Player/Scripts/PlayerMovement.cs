@@ -12,6 +12,7 @@ public class PlayerMovement : MonoBehaviour
     private float speed = 3.0f;
     private float gravityValue = -9.81f;
     private Transform modelTransform;
+    private string currentAnimationName;
 
     private void Start()
     {
@@ -21,8 +22,11 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        Move();
+        AnimatorClipInfo[] animatorInfo = animController.GetCurrentAnimatorClipInfo(0);
+        currentAnimationName = animatorInfo[0].clip.name;
+
         ApplyGravity();
+        Move();
     }
 
     void Move() 
@@ -57,13 +61,20 @@ public class PlayerMovement : MonoBehaviour
 
     void ApplyGravity() 
     {
-        
         if (characterController.isGrounded && velocity.y < 0)
         {
             velocity.y = 0f;
         }
 
+        if (Input.GetKey(KeyCode.Space) && characterController.isGrounded && currentAnimationName != "Falling Idle")
+        {
+            animController.SetTrigger("Jump");
+            velocity.y += Mathf.Sqrt(1f * -3.0f * gravityValue);
+        }
+
         velocity.y += gravityValue * Time.deltaTime;
         characterController.Move(velocity * Time.deltaTime);
+
+        animController.SetBool("Grounded", characterController.isGrounded);
     }
 }
