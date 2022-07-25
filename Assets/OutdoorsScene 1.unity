@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 2375.6807, g: 2266.4082, b: 2689.879, a: 1}
+  m_IndirectSpecularColor: {r: 2531.2344, g: 2573.5684, b: 3648.1797, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -11219,7 +11219,7 @@ PrefabInstance:
     - target: {fileID: 473522134643435021, guid: 897cc321a3df4604485044883881f46b,
         type: 3}
       propertyPath: m_Name
-      value: PlayerPrafab
+      value: PlayerPrefab
       objectReference: {fileID: 0}
     - target: {fileID: 3272712153672171287, guid: 897cc321a3df4604485044883881f46b,
         type: 3}
@@ -11294,12 +11294,12 @@ PrefabInstance:
     - target: {fileID: 5361333710586009703, guid: 897cc321a3df4604485044883881f46b,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.000000017172932
+      value: 0.00000001717293
       objectReference: {fileID: 0}
     - target: {fileID: 5361333710586009703, guid: 897cc321a3df4604485044883881f46b,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.0000000010723777
+      value: -0.0000000010723776
       objectReference: {fileID: 0}
     - target: {fileID: 5361333710980799690, guid: 897cc321a3df4604485044883881f46b,
         type: 3}
@@ -11339,12 +11339,12 @@ PrefabInstance:
     - target: {fileID: 5361333711322765642, guid: 897cc321a3df4604485044883881f46b,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -3.3902275e-10
+      value: 3.3902275e-10
       objectReference: {fileID: 0}
     - target: {fileID: 5361333711322765642, guid: 897cc321a3df4604485044883881f46b,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -5.6933126e-12
+      value: 5.693531e-12
       objectReference: {fileID: 0}
     - target: {fileID: 5361333711322765647, guid: 897cc321a3df4604485044883881f46b,
         type: 3}
@@ -11355,6 +11355,11 @@ PrefabInstance:
         type: 3}
       propertyPath: antialiasing
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5361333711784997424, guid: 897cc321a3df4604485044883881f46b,
+        type: 3}
+      propertyPath: playerSpeed
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5361333711784997430, guid: 897cc321a3df4604485044883881f46b,
         type: 3}
