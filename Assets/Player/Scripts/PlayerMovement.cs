@@ -16,6 +16,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Start()
     {
+        Cursor.lockState = CursorLockMode.Locked;
         characterController = transform.GetComponent<CharacterController>();
         modelTransform = transform.Find("PlayerModel");
     }
@@ -37,7 +38,7 @@ public class PlayerMovement : MonoBehaviour
         // Get directions
         Vector3 directionInput = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
         Vector3 directionToMove = isAiming ? modelTransform.TransformDirection(directionInput).normalized : cameraTransform.TransformDirection(directionInput).normalized;
-        directionToMove.y = 0f;
+        directionToMove.y = -0.1f;
 
         // Move
         if(directionInput != Vector3.zero)
@@ -66,7 +67,8 @@ public class PlayerMovement : MonoBehaviour
             velocity.y = -1f;
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) && currentAnimationName != "Jumping Idle")
+        Debug.Log(characterController.isGrounded);
+        if (Input.GetKeyDown(KeyCode.Space) && characterController.isGrounded)
         {
             animController.SetTrigger("Jump");
             velocity.y += Mathf.Sqrt(1.5f * -3.0f * gravityValue);
