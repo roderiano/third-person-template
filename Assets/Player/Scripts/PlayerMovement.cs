@@ -5,20 +5,23 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     public Transform cameraTransform;
-    public Animator animController;
-
+    public float playerSpeed, currentSpeed = 3.0f;
+    
     private CharacterController characterController;
     private Vector3 velocity;
-    private float speed = 3.0f;
     private float gravityValue = -9.81f;
     private Transform modelTransform;
     private string currentAnimationName;
+    private Animator animController;
 
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
         characterController = transform.GetComponent<CharacterController>();
         modelTransform = transform.Find("PlayerModel");
+        animController = modelTransform.GetComponent<Animator>();
+
+        currentSpeed = playerSpeed;
     }
 
     void Update()
@@ -32,18 +35,22 @@ public class PlayerMovement : MonoBehaviour
 
     void Move() 
     {
-        bool isAiming = Input.GetKey(KeyCode.Mouse1);
+        Vector3 directionInput = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+        bool isAiming = Input.GetKey(KeyCode.Mouse1) && characterController.isGrounded;
+        bool isRunning = Input.GetKey(KeyCode.LeftShift) && !isAiming && characterController.isGrounded && directionInput != Vector3.zero;
         
+        // Set running state
+        currentSpeed = isRunning ? playerSpeed + (playerSpeed * 0.5f) : playerSpeed;
+        animController.SetBool("Running", isRunning);
 
         // Get directions
-        Vector3 directionInput = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
         Vector3 directionToMove = isAiming ? modelTransform.TransformDirection(directionInput).normalized : cameraTransform.TransformDirection(directionInput).normalized;
         directionToMove.y = -0.1f;
 
         // Move
         if(directionInput != Vector3.zero)
         {
-            characterController.Move(directionToMove * Time.deltaTime * speed);
+            characterController.Move(directionToMove * Time.deltaTime * currentSpeed);
         }
 
         animController.SetFloat("MoveDirectionX", directionInput.x, 1f, Time.deltaTime * 10f);
