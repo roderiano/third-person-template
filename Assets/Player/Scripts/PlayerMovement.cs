@@ -66,10 +66,10 @@ public class PlayerMovement : MonoBehaviour
             velocity.y = -1f;
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) && currentAnimationName != "Falling Idle")
+        if (Input.GetKeyDown(KeyCode.Space) && currentAnimationName != "Jumping Idle")
         {
             animController.SetTrigger("Jump");
-            velocity.y += Mathf.Sqrt(1.2f * -3.0f * gravityValue);
+            velocity.y += Mathf.Sqrt(1.5f * -3.0f * gravityValue);
         }
 
         velocity.y += gravityValue * Time.deltaTime;
